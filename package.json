@@ -4,14 +4,17 @@
   "description": "Authorize easily",
   "author": "Vadim Demedes <vdemedes@gmail.com>",
   "license": "MIT",
-  "repository": "vadimdemedes/cancan",
+  "repository": "gsulloa/cancan",
+  "main": "lib",
   "engines": {
     "node": ">= 4"
   },
   "scripts": {
-    "test": "xo && ava"
+    "test": "xo && ava",
+    "build": "babel index.js -d lib"
   },
   "files": [
+    "lib",
     "index.js"
   ],
   "keywords": [
@@ -25,6 +28,7 @@
   },
   "devDependencies": {
     "ava": "^0.19.1",
+    "babel-cli": "^6.26.0",
     "xo": "^0.18.2"
   }
 }
