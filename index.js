@@ -1,7 +1,6 @@
 'use strict';
 
 const isObject = require('is-plain-obj');
-const autoBind = require('auto-bind');
 const arrify = require('arrify');
 
 const get = (obj, key) => typeof obj.get === 'function' ? obj.get(key) : obj[key];
@@ -19,7 +18,6 @@ const defaultCreateError = () => new Error('Authorization error');
 
 class CanCan {
 	constructor(options) {
-		autoBind(this);
 
 		options = options || {};
 
@@ -28,7 +26,7 @@ class CanCan {
 		this.createError = options.createError || defaultCreateError;
 	}
 
-	allow(model, actions, targets, condition) {
+	allow =(model, actions, targets, condition) => {
 		if (typeof condition !== 'undefined' && typeof condition !== 'function' && !isObject(condition)) {
 			throw new TypeError(`Expected condition to be object or function, got ${typeof condition}`);
 		}
@@ -44,7 +42,7 @@ class CanCan {
 		});
 	}
 
-	can(performer, action, target, options) {
+	can = (performer, action, target, options) => {
 		return this.abilities
 			.filter(ability => this.instanceOf(performer, ability.model))
 			.filter(ability => {
@@ -66,11 +64,11 @@ class CanCan {
 			.length > 0;
 	}
 
-	cannot() {
+	cannot = () => {
 		return !this.can.apply(this, arguments);
 	}
 
-	authorize() {
+	authorize = () => {
 		if (this.cannot.apply(this, arguments)) {
 			const err = this.createError.apply(null, arguments);
 			throw err;
